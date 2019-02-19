@@ -5,6 +5,8 @@ package team.mediasoft.mguseva.eduproject;
  */
 public class Film {
 
+    private int id;
+
     /**
      * Название
      */

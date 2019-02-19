@@ -5,6 +5,7 @@ package team.mediasoft.mguseva.eduproject;
  */
 public class Genre {
 
+    private int id;
     private String name;
 
     public Genre(String name) {

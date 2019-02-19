@@ -5,6 +5,7 @@ package team.mediasoft.mguseva.eduproject;
  */
 public abstract class Person {
 
+    private int id;
     private String name;
 
     public Person(String name) {
