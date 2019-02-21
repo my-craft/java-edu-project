@@ -41,8 +41,14 @@ public abstract class Parameter implements Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        try {
+            Object newObject = super.clone();
+
+            return newObject;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     @Override
