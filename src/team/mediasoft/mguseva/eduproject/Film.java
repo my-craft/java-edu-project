@@ -3,9 +3,7 @@ package team.mediasoft.mguseva.eduproject;
 /**
  * Фильм
  */
-public class Film {
-
-    private int id;
+public class Film implements Cloneable {
 
     /**
      * Название

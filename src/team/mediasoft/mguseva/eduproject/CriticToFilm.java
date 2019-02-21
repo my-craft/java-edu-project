@@ -5,8 +5,8 @@ public class CriticToFilm extends FilmParameter {
     private int rate;
     private String comment;
 
-    public CriticToFilm(int criticId, int filmId) {
-        super(criticId, filmId);
+    public CriticToFilm(Critic critic, Film film) {
+        super(critic, film);
     }
 
     public int getRate() {

@@ -2,27 +2,27 @@ package team.mediasoft.mguseva.eduproject;
 
 public abstract class FilmParameter {
 
-    private int parameterId;
-    private int filmId;
+    private Parameter parameter;
+    private Film film;
 
-    public FilmParameter(int parameterId, int filmId) {
-        this.parameterId = parameterId;
-        this.filmId = filmId;
+    public FilmParameter(Parameter parameter, Film film) {
+        this.parameter = parameter;
+        this.film = film;
     }
 
-    public int getParameterId() {
-        return parameterId;
+    public Parameter getParameter() {
+        return parameter;
     }
 
-    public void setParameterId(int parameterId) {
-        this.parameterId = parameterId;
+    public void setParameter(Parameter parameter) {
+        this.parameter = parameter;
     }
 
-    public int getFilmId() {
-        return filmId;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilmId(int filmId) {
-        this.filmId = filmId;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 }

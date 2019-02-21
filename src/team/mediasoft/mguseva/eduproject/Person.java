@@ -3,20 +3,9 @@ package team.mediasoft.mguseva.eduproject;
 /**
  * Человек
  */
-public abstract class Person {
-
-    private int id;
-    private String name;
+public abstract class Person extends Parameter {
 
     public Person(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        super(name);
     }
 }

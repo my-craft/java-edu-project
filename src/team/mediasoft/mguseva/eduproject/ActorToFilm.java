@@ -4,8 +4,8 @@ public class ActorToFilm extends FilmParameter {
 
     private String character;
 
-    public ActorToFilm(int actorId, int filmId) {
-        super(actorId, filmId);
+    public ActorToFilm(Actor actor, Film film) {
+        super(actor, film);
     }
 
     public String getCharacter() {
