@@ -9,6 +9,13 @@ public class CriticToFilm extends FilmParameter {
         super(critic, film);
     }
 
+    public CriticToFilm(Critic critic, Film film, int rate, String comment) {
+        super(critic, film);
+
+        this.rate = rate;
+        this.comment = comment;
+    }
+
     public int getRate() {
         return rate;
     }
@@ -23,5 +30,17 @@ public class CriticToFilm extends FilmParameter {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        String info = super.toString();
+
+        info += "\n" +
+                ((this.rate != 0) ? this.rate : "Оценка отсутствует") +
+                "\n" +
+                ((this.comment != null) ? this.comment : "Комментарий отсутствует");
+
+        return info;
     }
 }
