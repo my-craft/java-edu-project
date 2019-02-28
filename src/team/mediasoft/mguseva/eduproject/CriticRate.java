@@ -1,16 +1,16 @@
 package team.mediasoft.mguseva.eduproject;
 
-public class CriticToFilm extends FilmParameter {
+public class CriticRate extends FilmParameter {
 
     private int rate;
     private String comment;
 
-    public CriticToFilm(Critic critic, Film film) {
-        super(critic, film);
+    public CriticRate(Critic critic) {
+        super(critic);
     }
 
-    public CriticToFilm(Critic critic, Film film, int rate, String comment) {
-        super(critic, film);
+    public CriticRate(Critic critic, int rate, String comment) {
+        super(critic);
 
         this.rate = rate;
         this.comment = comment;

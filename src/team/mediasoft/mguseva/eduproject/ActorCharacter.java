@@ -1,11 +1,11 @@
 package team.mediasoft.mguseva.eduproject;
 
-public class ActorToFilm extends FilmParameter {
+public class ActorCharacter extends FilmParameter {
 
     private String character;
 
-    public ActorToFilm(Actor actor, Film film) {
-        super(actor, film);
+    public ActorCharacter(Actor actor) {
+        super(actor);
     }
 
     public String getCharacter() {

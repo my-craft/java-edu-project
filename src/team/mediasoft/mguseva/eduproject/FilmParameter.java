@@ -5,11 +5,9 @@ import java.util.Objects;
 public abstract class FilmParameter {
 
     private Parameter parameter;
-    private Film film;
 
-    public FilmParameter(Parameter parameter, Film film) {
+    public FilmParameter(Parameter parameter) {
         this.parameter = parameter;
-        this.film = film;
     }
 
     public Parameter getParameter() {
@@ -20,12 +18,8 @@ public abstract class FilmParameter {
         this.parameter = parameter;
     }
 
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
+    public String getParameterName(Parameter parameter) {
+        return this.parameter.getName();
     }
 
     @Override
@@ -39,13 +33,12 @@ public abstract class FilmParameter {
         }
 
         FilmParameter filmParameter = (FilmParameter) filmParameterObject;
-        return Objects.equals(this.parameter, filmParameter.getParameter()) &&
-                Objects.equals(this.film, filmParameter.getParameter());
+        return Objects.equals(this.parameter, filmParameter.getParameter());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.parameter, this.film);
+        return Objects.hash(this.parameter);
     }
 
     @Override
@@ -61,6 +54,6 @@ public abstract class FilmParameter {
 
     @Override
     public String toString() {
-        return this.film.toString() + " - " + this.parameter.toString();
+        return this.parameter.toString();
     }
 }

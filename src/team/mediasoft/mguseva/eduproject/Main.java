@@ -30,14 +30,14 @@ public class Main {
         System.out.println(titanic);
         System.out.println(titanic2);
 
-        CriticToFilm valeraTitanic = new CriticToFilm(valera, titanic);
+        /*CriticRate valeraTitanic = new CriticRate(valera, titanic);
         System.out.println(valeraTitanic);
 
         valeraTitanic.setRate(5);
         valeraTitanic.setComment("Мне понравилось");
         System.out.println(valeraTitanic);
 
-        CriticToFilm valera2Titanic = new CriticToFilm(valera2, titanic, 1, "А мне нет");
-        System.out.println(valera2Titanic);
+        CriticRate valera2Titanic = new CriticRate(valera2, titanic, 1, "А мне нет");
+        System.out.println(valera2Titanic);*/
     }
 }
