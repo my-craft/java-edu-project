@@ -1,10 +1,12 @@
 package team.mediasoft.mguseva.eduproject;
 
 import java.lang.*;
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
-        Critic valera = new Critic("Валера");
+        /*Critic valera = new Critic("Валера");
         System.out.println(valera);
 
         Critic valera2 = new Critic("Валера");
@@ -17,18 +19,26 @@ public class Main {
             System.out.println(valera3.equals(valera));
         } else {
             System.out.println("valera3 failed");
-        }
+        }*/
 
         Film titanic = new Film("Титаник", 1997, "");
         Film titanic2 = (Film) titanic.clone();
 
-        System.out.println(titanic);
-        System.out.println(titanic2);
+        //System.out.println(titanic);
+        //System.out.println(titanic2);
 
         titanic2.setYear(1990);
 
-        System.out.println(titanic);
-        System.out.println(titanic2);
+        //System.out.println(titanic);
+        //System.out.println(titanic2);
+
+        ArrayList<Director> titanicDirectors = new ArrayList<Director>(2);
+        titanicDirectors.add(new Director("тест1"));
+        titanicDirectors.add(new Director("тест2"));
+
+        titanic.setDirectors(titanicDirectors);
+
+        System.out.println(titanic.getFullInfo());
 
         /*CriticRate valeraTitanic = new CriticRate(valera, titanic);
         System.out.println(valeraTitanic);

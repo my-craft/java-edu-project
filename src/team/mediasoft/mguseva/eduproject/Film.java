@@ -22,6 +22,26 @@ public class Film implements Cloneable {
      */
     private String description;
 
+    /**
+     * Актеры
+     */
+    private ArrayList<ActorCharacter> actors;
+
+    /**
+     * Режиссеры
+     */
+    private ArrayList<Director> directors;
+
+    /**
+     * Жанры
+     */
+    private ArrayList<Genre> genres;
+
+    /**
+     * Оценки и отзывы критиков
+     */
+    private ArrayList<CriticRate> rates;
+
     public Film(String name, int year, String description) {
         this.name = name;
         this.year = year;
@@ -50,6 +70,63 @@ public class Film implements Cloneable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ArrayList<ActorCharacter> getActors() {
+        return actors;
+    }
+
+    public void setActors(ArrayList<ActorCharacter> actors) {
+        this.actors = actors;
+    }
+
+    public ArrayList<Director> getDirectors() {
+        return directors;
+    }
+
+    public void setDirectors(ArrayList<Director> directors) {
+        this.directors = directors;
+    }
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public ArrayList<CriticRate> getRates() {
+        return rates;
+    }
+
+    public void setRates(ArrayList<CriticRate> rates) {
+        this.rates = rates;
+    }
+
+    /**
+     * Текст с полной информацией о фильме
+     * @return
+     */
+    public String getFullInfo()
+    {
+        String info = "Фильм: " + this.name +
+                        "\nГод выпуска: " + this.year;
+
+        if (this.directors != null && this.directors.size() > 0) {
+            String directorLabel = "\nРежиссер";
+            if (this.directors.size() > 1) {
+                directorLabel += "ы";
+            }
+
+            /*info += directorLabel + ": " + String.join(", ", this.directors.toArray());
+
+            for (Director director : this.directors) {
+                info +=
+            }*/
+        }
+
+        return info;
     }
 
     @Override
