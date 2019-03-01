@@ -14,7 +14,7 @@ public class FileWorker {
 
             String str = "";
             while ((str = in.readLine()) != null) {
-                System.out.println(str);
+                outString.append(str);
             }
 
         } catch (Exception e) {
