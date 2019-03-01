@@ -8,6 +8,13 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+        //Main.printTestFilm();
+
+        String res = FileWorker.getStringFromFile("src/files/test.txt");
+        System.out.println(res);
+    }
+
+    public static void printTestFilm() {
         String titanicDescription = "Молодые влюбленные Джек и Роза находят друг друга в первом и последнем плавании «непотопляемого» Титаника.\nОни не могли знать, что шикарный лайнер столкнется с айсбергом в холодных водах Северной Атлантики, и их страстная любовь превратится в схватку со смертью.";
 
         Film titanic = new Film("Титаник", 1997, titanicDescription);
