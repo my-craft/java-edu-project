@@ -1,4 +1,4 @@
-package team.mediasoft.mguseva.eduproject;
+package team.mediasoft.mguseva.eduproject.film;
 
 import java.util.Objects;
 

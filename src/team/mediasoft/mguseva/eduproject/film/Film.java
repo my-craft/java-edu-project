@@ -1,11 +1,14 @@
-package team.mediasoft.mguseva.eduproject;
+package team.mediasoft.mguseva.eduproject.film;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Фильм
  */
 public class Film implements Cloneable {
+
+    private static int firstFilmYear = 1895;
 
     /**
      * Название
@@ -106,27 +109,54 @@ public class Film implements Cloneable {
 
     /**
      * Текст с полной информацией о фильме
-     * @return
+     * @return String
      */
     public String getFullInfo()
     {
-        String info = "Фильм: " + this.name +
-                        "\nГод выпуска: " + this.year;
+        String info = "Фильм: " + ((this.name != null && !this.name.isEmpty()) ? this.name : "-") +
+                        "\nГод выпуска: " + (this.year >= Film.firstFilmYear ? this.year : "-");
 
-        if (this.directors != null && this.directors.size() > 0) {
+        if (this.genres != null && !this.genres.isEmpty()) {
+            String genreLabel = "\nЖанр";
+            if (this.genres.size() > 1) {
+                genreLabel += "ы";
+            }
+
+            // метод склеивания взят отсюда http://qaru.site/questions/20303/best-way-to-convert-an-arraylist-to-a-string
+            info += genreLabel + ": " + this.genres.stream().map(Object::toString).collect(Collectors.joining(", "));
+        }
+
+        info += "\nОписание: " + ((this.description != null && !this.description.isEmpty()) ? this.description : "-") + "\n";
+
+        if (this.directors != null && !this.directors.isEmpty()) {
             String directorLabel = "\nРежиссер";
             if (this.directors.size() > 1) {
                 directorLabel += "ы";
             }
 
-            /*info += directorLabel + ": " + String.join(", ", this.directors.toArray());
+            info += directorLabel + ": " + this.directors.stream().map(Object::toString).collect(Collectors.joining(", "));
+        }
 
-            for (Director director : this.directors) {
-                info +=
-            }*/
+        if (this.actors != null && !this.actors.isEmpty()) {
+            String actorLabel = "\n\nАктер";
+            if (this.actors.size() > 1) {
+                actorLabel += "ы";
+            }
+
+            info += actorLabel + ": \n" + this.actors.stream().map(Object::toString).collect(Collectors.joining("\n"));
         }
 
         return info;
+    }
+
+    /**
+     * Получить отзывы критиков
+     * @return String
+     */
+    public String getCriticRates() {
+        String rates = "Отзывы: ";
+
+        return  rates;
     }
 
     @Override
