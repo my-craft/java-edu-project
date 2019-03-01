@@ -154,7 +154,29 @@ public class Film implements Cloneable {
      * @return String
      */
     public String getCriticRates() {
-        String rates = "Отзывы: ";
+        String rates = "Средняя оценка: ";
+
+        boolean hasRates = (this.rates != null && !this.rates.isEmpty());
+
+        if (hasRates) {
+            int rateSum = 0;
+            int rateCount = 0;
+
+            for (CriticRate rate : this.rates) {
+                rateSum += rate.getRate();
+                rateCount++;
+            }
+
+            rates += ((float)rateSum / (float)rateCount) + "\n";
+        }
+
+        rates += "Отзывы: \n";
+
+        if (hasRates) {
+            rates += this.rates.stream().map(Object::toString).collect(Collectors.joining("\n***\n"));
+        } else {
+            rates += "Никто ещё не оставил ни одного отзыва";
+        }
 
         return  rates;
     }

@@ -36,10 +36,10 @@ public class CriticRate extends FilmParameter {
     public String toString() {
         String info = super.toString();
 
-        info += "\n" +
-                ((this.rate != 0) ? this.rate : "Оценка отсутствует") +
-                "\n" +
-                ((this.comment != null) ? this.comment : "Комментарий отсутствует");
+        info += "\nОценка: " +
+                ((this.rate != 0) ? this.rate : "отсутствует") +
+                "\nКомментарий: " +
+                ((this.comment != null) ? this.comment : "отсутствует");
 
         return info;
     }

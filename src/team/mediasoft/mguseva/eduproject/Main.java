@@ -44,7 +44,12 @@ public class Main {
         valeraTitanic.setRate(5);
         valeraTitanic.setComment("Мне понравилось");
 
-        CriticRate valera2Titanic = new CriticRate(valera2, 1, "А мне нет");
+        CriticRate valera2Titanic = new CriticRate(valera2, 2, "А мне нет");
+
+        titanic.setRates(new ArrayList<CriticRate>() {{
+            add(valeraTitanic);
+            add(valera2Titanic);
+        }});
 
         System.out.println("\n***\n" + titanic.getCriticRates());
     }
