@@ -13,7 +13,12 @@ public class FileWorker {
             in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
 
             String str = "";
+
+            // добавляем перенос строки, а чтобы вначале его не было, инициализируем уже в цикле
+            String prefix = "";
             while ((str = in.readLine()) != null) {
+                outString.append(prefix);
+                prefix = "\n";
                 outString.append(str);
             }
 
@@ -33,6 +38,31 @@ public class FileWorker {
     }
 
     public static void setStringToFile(String fileName, String outString) {
+        BufferedWriter out = null;
 
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8));
+
+            String[] strArray = outString.split("\n");
+
+            for (int i = 0; i < strArray.length; i++) {
+                out.write(strArray[i]);
+
+                // если не последняя строка, дописать перенос
+                if (i < (strArray.length - 1)) {
+                    out.write("\n");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Oops!");
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (Exception e) {
+                    System.out.println("Oops! [2]");
+                }
+            }
+        }
     }
 }

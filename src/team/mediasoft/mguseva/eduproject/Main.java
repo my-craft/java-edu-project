@@ -11,7 +11,7 @@ public class Main {
         //Main.printTestFilm();
 
         String res = FileWorker.getStringFromFile("src/files/test.txt");
-        System.out.println(res);
+        FileWorker.setStringToFile("src/files/test_out.txt", res);
     }
 
     public static void printTestFilm() {
