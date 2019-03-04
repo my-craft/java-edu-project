@@ -1,6 +1,6 @@
 package team.mediasoft.mguseva.eduproject.film;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Параметр фильма

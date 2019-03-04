@@ -2,6 +2,7 @@ package team.mediasoft.mguseva.eduproject;
 
 import team.mediasoft.mguseva.eduproject.film.Actor;
 import team.mediasoft.mguseva.eduproject.film.Film;
+import team.mediasoft.mguseva.eduproject.film.Parameter;
 
 import java.util.*;
 
@@ -22,8 +23,42 @@ public class FilmsLoader {
     }
 
     public void loadFilmsFromFile() {
-        HashMap<Integer, Actor> actorsList = this.getActorsList();
-        System.out.println(actorsList);
+        HashMap<Integer, String> actorsList = this.getParametersList("src/files/actors.csv");
+        HashMap<Integer, String> directorsList = this.getParametersList("src/files/directors.csv");
+        HashMap<Integer, String> genresList = this.getParametersList("src/files/genres.csv");
+
+        System.out.println(genresList);
+    }
+
+    private HashMap<Integer, String> getParametersList(String csvFileName) {
+        ArrayList<String> parametersTextList = this.getContentFromFile(csvFileName);
+
+        if (parametersTextList == null) {
+            return null;
+        }
+
+        HashMap<Integer, String> parametersList = new HashMap<Integer, String>();
+        for (String parameterText : parametersTextList) {
+            this.addParameterFromString(parameterText, parametersList);
+        }
+
+        return parametersList;
+    }
+
+    private void addParameterFromString(String parameterText, HashMap<Integer, String> parametersList) {
+        String[] parameterInfo = this.getArrayFromString(parameterText, 2);
+        if (parameterInfo == null) {
+            return;
+        }
+
+        int id = 0;
+        try {
+            id = Integer.parseInt(parameterInfo[0]);
+        } catch (Exception e) {
+            return;
+        }
+
+        parametersList.put((Integer)id, parameterInfo[1]);
     }
 
     private ArrayList<String> getContentFromFile(String fileName) {
@@ -32,34 +67,16 @@ public class FilmsLoader {
         return actorsWorker.getContent();
     }
 
-    private HashMap<Integer, Actor> getActorsList() {
-        ArrayList<String> actorsTextList = this.getContentFromFile("src/files/actors.csv");
-        HashMap<Integer, Actor> actorsList = new HashMap<Integer, Actor>();
-        for (String actorText : actorsTextList) {
-            Actor tempActor = this.getActorFromString(actorText);
-            actorsList.put((Integer)tempActor.getId(), tempActor);
-        }
-
-        return actorsList;
-    }
-
-    private Actor getActorFromString(String actorText) {
-        if (actorText == null) {
+    private String[] getArrayFromString(String str, int count) {
+        if (str == null) {
             return null;
         }
 
-        String[] actorInfo = actorText.split(";");
-        if (actorInfo.length != 2) {
+        String[] strArray = str.split(";");
+        if (strArray.length != count) {
             return null;
         }
 
-        int actorId = 0;
-        try {
-            actorId = Integer.parseInt(actorInfo[0]);
-        } catch (Exception e) {
-            return null;
-        }
-
-        return new Actor(actorId, actorInfo[1]);
+        return strArray;
     }
 }
