@@ -10,6 +10,8 @@ public class Film implements Cloneable {
 
     private static int firstFilmYear = 1895;
 
+    private int id;
+
     /**
      * Название
      */
@@ -49,6 +51,21 @@ public class Film implements Cloneable {
         this.name = name;
         this.year = year;
         this.description = description;
+    }
+
+    public Film(int id, String name, int year, String description) {
+        this.id = id;
+        this.name = name;
+        this.year = year;
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

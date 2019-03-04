@@ -7,9 +7,16 @@ import java.util.Objects;
  */
 public abstract class Parameter implements Cloneable {
 
+    private int id;
+
     private String name;
 
     public Parameter(String name) {
+        this.name = name;
+    }
+
+    public Parameter(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -19,6 +26,14 @@ public abstract class Parameter implements Cloneable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

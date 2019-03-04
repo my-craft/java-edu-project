@@ -2,6 +2,8 @@ package team.mediasoft.mguseva.eduproject;
 
 import team.mediasoft.mguseva.eduproject.film.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.*;
 import java.util.ArrayList;
 
@@ -10,8 +12,25 @@ public class Main {
     public static void main(String[] args) {
         //Main.printTestFilm();
 
-        String res = FileWorker.getStringFromFile("src/files/test.txt");
-        FileWorker.setStringToFile("src/files/test_out.txt", res);
+        /*String res = FileWorker.getStringFromFile("src/files/test.txt");
+        FileWorker.setStringToFile("src/files/test_out.txt", res);*/
+
+        /*try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter String: ");
+            String s = br.readLine();
+            System.out.print("Enter Integer: ");
+            try {
+                int i = Integer.parseInt(br.readLine());
+            } catch (NumberFormatException nfe) {
+                System.err.println("Invalid Format!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        FilmsLoader loader = new FilmsLoader();
+        loader.loadFilmsFromFile();
     }
 
     public static void printTestFilm() {
