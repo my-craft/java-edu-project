@@ -30,7 +30,7 @@ public class Main {
         }*/
 
         FilmsLoader loader = new FilmsLoader();
-        loader.loadFilmsFromFile();
+        loader.loadFilms();
     }
 
     public static void printTestFilm() {
