@@ -35,12 +35,12 @@ public class Film implements Cloneable {
     /**
      * Режиссеры
      */
-    private List<Director> directors;
+    private List<FilmDirector> directors;
 
     /**
      * Жанры
      */
-    private List<Genre> genres;
+    private List<FilmGenre> genres;
 
     /**
      * Оценки и отзывы критиков
@@ -100,19 +100,19 @@ public class Film implements Cloneable {
         this.actors = actors;
     }
 
-    public List<Director> getDirectors() {
+    public List<FilmDirector> getDirectors() {
         return directors;
     }
 
-    public void setDirectors(List<Director> directors) {
+    public void setDirectors(List<FilmDirector> directors) {
         this.directors = directors;
     }
 
-    public List<Genre> getGenres() {
+    public List<FilmGenre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(List<FilmGenre> genres) {
         this.genres = genres;
     }
 
@@ -124,30 +124,30 @@ public class Film implements Cloneable {
         this.rates = rates;
     }
 
-    public void addActorCharacter(String actorName, String characterName) {
+    public void addActorCharacter(ActorCharacter actorCharacter) {
         if (this.actors == null) {
             this.actors = new ArrayList<ActorCharacter>();
         }
 
-        if (actorName != null && actorName.length() > 0 && characterName != null && characterName.length() > 0) {
-            this.actors.add(new ActorCharacter(new Actor(actorName), characterName));
+        if (actorCharacter != null) {
+            this.actors.add(actorCharacter);
         }
     }
 
-    public void addDirector(String directorName) {
+    public void addDirector(FilmDirector director) {
         if (this.directors == null) {
-            this.directors = new ArrayList<Director>();
+            this.directors = new ArrayList<FilmDirector>();
         }
 
-        this.directors.add(new Director(directorName));
+        this.directors.add(director);
     }
 
-    public void addGenre(String genre) {
+    public void addGenre(FilmGenre genre) {
         if (this.genres == null) {
-            this.genres = new ArrayList<Genre>();
+            this.genres = new ArrayList<FilmGenre>();
         }
 
-        this.genres.add(new Genre(genre));
+        this.genres.add(genre);
     }
 
     public void addCriticRate(CriticRate rate) {

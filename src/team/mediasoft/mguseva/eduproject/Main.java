@@ -36,8 +36,8 @@ public class Main {
 
         Film titanic = new Film("Титаник", 1997, titanicDescription);
 
-        List<Director> titanicDirectors = new ArrayList<Director>(1);
-        titanicDirectors.add(new Director("Джеймс Кэмерон"));
+        List<FilmDirector> titanicDirectors = new ArrayList<>(1);
+        titanicDirectors.add(new FilmDirector(new Director("Джеймс Кэмерон")));
 
         titanic.setDirectors(titanicDirectors);
 
@@ -49,9 +49,9 @@ public class Main {
 
         titanic.setActors(titanicActors);
 
-        List<Genre> titanicGenre = new ArrayList<Genre>(2);
-        titanicGenre.add(new Genre("драма"));
-        titanicGenre.add(new Genre("мелодрама"));
+        List<FilmGenre> titanicGenre = new ArrayList<>(2);
+        titanicGenre.add(new FilmGenre(new Genre("драма")));
+        titanicGenre.add(new FilmGenre(new Genre("мелодрама")));
 
         titanic.setGenres(titanicGenre);
 

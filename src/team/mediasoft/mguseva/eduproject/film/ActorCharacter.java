@@ -1,10 +1,13 @@
 package team.mediasoft.mguseva.eduproject.film;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ActorCharacter extends FilmParameter {
 
     private String character;
+
+    public ActorCharacter() {}
 
     public ActorCharacter(Actor actor) {
         super(actor);
@@ -64,5 +67,26 @@ public class ActorCharacter extends FilmParameter {
         }
 
         return characterString;
+    }
+
+    @Override
+    public void addParameterToFilm(Film film) {
+        if (film != null) {
+            film.addActorCharacter(this);
+        }
+    }
+
+    @Override
+    public void setParameterByName(String actorName) {
+        if (actorName != null && actorName.length() > 0) {
+            this.setParameter(new Actor(actorName));
+        }
+    }
+
+    @Override
+    public void setAddParameter(List<String> addParameters) {
+        if (addParameters != null && addParameters.size() > 0) {
+            this.character = addParameters.iterator().next();
+        }
     }
 }

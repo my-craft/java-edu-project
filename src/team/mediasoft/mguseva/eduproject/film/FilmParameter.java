@@ -1,10 +1,13 @@
 package team.mediasoft.mguseva.eduproject.film;
 
+import java.util.List;
 import java.util.Objects;
 
 public abstract class FilmParameter {
 
     private Parameter parameter;
+
+    public FilmParameter() {}
 
     public FilmParameter(Parameter parameter) {
         this.parameter = parameter;
@@ -56,4 +59,10 @@ public abstract class FilmParameter {
     public String toString() {
         return this.parameter.toString();
     }
+
+    public abstract void addParameterToFilm(Film film);
+
+    public abstract void setParameterByName(String parameterName);
+
+    public abstract void setAddParameter(List<String> addParameters);
 }

@@ -1,9 +1,13 @@
 package team.mediasoft.mguseva.eduproject.film;
 
+import java.util.List;
+
 public class CriticRate extends FilmParameter {
 
     private int rate;
     private String comment;
+
+    public CriticRate() {}
 
     public CriticRate(Critic critic) {
         super(critic);
@@ -42,5 +46,20 @@ public class CriticRate extends FilmParameter {
                 ((this.comment != null) ? this.comment : "отсутствует");
 
         return info;
+    }
+
+    @Override
+    public void addParameterToFilm(Film film) {
+
+    }
+
+    @Override
+    public void setParameterByName(String parameterName) {
+
+    }
+
+    @Override
+    public void setAddParameter(List<String> addParameters) {
+
     }
 }
