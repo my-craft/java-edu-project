@@ -32,17 +32,17 @@ public class FilmsLoader {
             return;
         }
 
-        HashMap<Integer, String> loadedActorsList = this.getParametersList("src/files/actors.csv");
+        HashMap<Integer, String> loadedActorsList = this.getParametersList("src/main/resources/actors.csv");
         if (loadedActorsList != null) {
             this.actorsList = loadedActorsList;
         }
 
-        HashMap<Integer, String> loadedDirectorsList = this.getParametersList("src/files/directors.csv");
+        HashMap<Integer, String> loadedDirectorsList = this.getParametersList("src/main/resources/directors.csv");
         if (loadedDirectorsList != null) {
             this.directorsList = loadedDirectorsList;
         }
 
-        HashMap<Integer, String> loadedGenresList = this.getParametersList("src/files/genres.csv");
+        HashMap<Integer, String> loadedGenresList = this.getParametersList("src/main/resources/genres.csv");
         if (loadedGenresList != null) {
             this.genresList = loadedGenresList;
         }
@@ -51,7 +51,7 @@ public class FilmsLoader {
     }
 
     private void loadFilmInfo() {
-        ArrayList<String> filmsTextList = this.getContentFromFile("src/files/films.csv");
+        ArrayList<String> filmsTextList = this.getContentFromFile("src/main/resources/films.csv");
         if (filmsTextList == null) {
             return;
         }
@@ -70,9 +70,9 @@ public class FilmsLoader {
     }
 
     private void enrichFilmsInfo() {
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmCharactersTextList = this.getFilmParametersList("src/files/actor_characters.csv");
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmDirectorsTextList = this.getFilmParametersList("src/files/film_directors.csv");
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmGenresTextList = this.getFilmParametersList("src/files/film_genres.csv");
+        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmCharactersTextList = this.getFilmParametersList("src/main/resources/actor_characters.csv");
+        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmDirectorsTextList = this.getFilmParametersList("src/main/resources/film_directors.csv");
+        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmGenresTextList = this.getFilmParametersList("src/main/resources/film_genres.csv");
 
 
 
