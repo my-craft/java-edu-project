@@ -134,20 +134,20 @@ public class Film implements Cloneable {
         }
     }
 
-    public void addDirector(Director director) {
+    public void addDirector(String directorName) {
         if (this.directors == null) {
             this.directors = new ArrayList<Director>();
         }
 
-        this.directors.add(director);
+        this.directors.add(new Director(directorName));
     }
 
-    public void addGenre(Genre genre) {
+    public void addGenre(String genre) {
         if (this.genres == null) {
             this.genres = new ArrayList<Genre>();
         }
 
-        this.genres.add(genre);
+        this.genres.add(new Genre(genre));
     }
 
     public void addCriticRate(CriticRate rate) {

@@ -90,6 +90,30 @@ public class FilmsLoader {
                 }
             }
 
+            if (filmDirectorsTextList != null && this.directorsList != null) {
+                List<Map<Integer, String>> filmDirectors = filmDirectorsTextList.get(filmId);
+                if (filmDirectors != null) {
+                    for (Map<Integer, String> filmDirector : filmDirectors) {
+                        Map.Entry<Integer,String> entry = filmDirector.entrySet().iterator().next();
+                        if (entry != null) {
+                            film.addDirector(this.directorsList.get(entry.getKey()));
+                        }
+                    }
+                }
+            }
+
+            if (filmGenresTextList != null && this.genresList != null) {
+                List<Map<Integer, String>> filmGenres = filmGenresTextList.get(filmId);
+                if (filmGenres != null) {
+                    for (Map<Integer, String> filmGenre : filmGenres) {
+                        Map.Entry<Integer,String> entry = filmGenre.entrySet().iterator().next();
+                        if (entry != null) {
+                            film.addGenre(this.genresList.get(entry.getKey()));
+                        }
+                    }
+                }
+            }
+
             System.out.println(film.getFullInfo() + "\n\n\n");
         }
     }
