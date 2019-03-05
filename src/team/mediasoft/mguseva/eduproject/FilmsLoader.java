@@ -81,13 +81,22 @@ public class FilmsLoader {
             if (filmCharactersTextList != null && this.actorsList != null) {
                 List<Map<Integer, String>> filmCharacters = filmCharactersTextList.get(filmId);
                 if (filmCharacters != null) {
-                    
-                }
+                    for (Map<Integer, String> filmCharacter : filmCharacters) {
+                        Map.Entry<Integer,String> entry = filmCharacter.entrySet().iterator().next();
+                        if (entry != null) {
+                            Integer key = entry.getKey();
+                            String value = entry.getValue();
 
-                System.out.println(filmCharacters);
+                            String actorName = this.actorsList.get(key);
+                            if (actorName != null && actorName.length() > 0 && value != null && value.length() > 0) {
+                                film.addActorCharacter(new ActorCharacter(new Actor(actorName), value));
+                            }
+                        }
+                    }
+                }
             }
 
-            //System.out.println(film.getFullInfo());
+            System.out.println(film.getFullInfo() + "\n\n\n");
         }
     }
 

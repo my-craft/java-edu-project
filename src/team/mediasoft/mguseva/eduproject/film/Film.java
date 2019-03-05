@@ -124,6 +124,38 @@ public class Film implements Cloneable {
         this.rates = rates;
     }
 
+    public void addActorCharacter(ActorCharacter actorCharacter) {
+        if (this.actors == null) {
+            this.actors = new ArrayList<ActorCharacter>();
+        }
+
+        this.actors.add(actorCharacter);
+    }
+
+    public void addDirector(Director director) {
+        if (this.directors == null) {
+            this.directors = new ArrayList<Director>();
+        }
+
+        this.directors.add(director);
+    }
+
+    public void addGenre(Genre genre) {
+        if (this.genres == null) {
+            this.genres = new ArrayList<Genre>();
+        }
+
+        this.genres.add(genre);
+    }
+
+    public void addCriticRate(CriticRate rate) {
+        if (this.rates == null) {
+            this.rates = new ArrayList<CriticRate>();
+        }
+
+        this.rates.add(rate);
+    }
+
     /**
      * Текст с полной информацией о фильме
      * @return String
