@@ -124,12 +124,14 @@ public class Film implements Cloneable {
         this.rates = rates;
     }
 
-    public void addActorCharacter(ActorCharacter actorCharacter) {
+    public void addActorCharacter(String actorName, String characterName) {
         if (this.actors == null) {
             this.actors = new ArrayList<ActorCharacter>();
         }
 
-        this.actors.add(actorCharacter);
+        if (actorName != null && actorName.length() > 0 && characterName != null && characterName.length() > 0) {
+            this.actors.add(new ActorCharacter(new Actor(actorName), characterName));
+        }
     }
 
     public void addDirector(Director director) {

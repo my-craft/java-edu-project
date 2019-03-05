@@ -84,13 +84,7 @@ public class FilmsLoader {
                     for (Map<Integer, String> filmCharacter : filmCharacters) {
                         Map.Entry<Integer,String> entry = filmCharacter.entrySet().iterator().next();
                         if (entry != null) {
-                            Integer key = entry.getKey();
-                            String value = entry.getValue();
-
-                            String actorName = this.actorsList.get(key);
-                            if (actorName != null && actorName.length() > 0 && value != null && value.length() > 0) {
-                                film.addActorCharacter(new ActorCharacter(new Actor(actorName), value));
-                            }
+                            film.addActorCharacter(this.actorsList.get(entry.getKey()), entry.getValue());
                         }
                     }
                 }

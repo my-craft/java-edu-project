@@ -55,7 +55,7 @@ public class ActorCharacter extends FilmParameter {
             characterString += "-";
         }
 
-        characterString += "\nРоль: ";
+        characterString += "\n\tРоль: ";
 
         if (this.character != null && !this.character.isEmpty()) {
             characterString += this.character;
