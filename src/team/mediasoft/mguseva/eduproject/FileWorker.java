@@ -2,19 +2,19 @@ package team.mediasoft.mguseva.eduproject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.*;
 
 public class FileWorker {
 
     private String fileName;
-    private ArrayList<String> content;
+    private List<String> content;
 
     public FileWorker(String fileName) {
         this.fileName = fileName;
         this.content = new ArrayList<String>();
     }
 
-    public FileWorker(String fileName, ArrayList<String> content) {
+    public FileWorker(String fileName, List<String> content) {
         this.fileName = fileName;
         this.content = content;
     }
@@ -27,11 +27,11 @@ public class FileWorker {
         this.fileName = fileName;
     }
 
-    public ArrayList<String> getContent() {
+    public List<String> getContent() {
         return content;
     }
 
-    public void setContent(ArrayList<String> content) {
+    public void setContent(List<String> content) {
         this.content = content;
     }
 

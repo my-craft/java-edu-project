@@ -2,10 +2,8 @@ package team.mediasoft.mguseva.eduproject;
 
 import team.mediasoft.mguseva.eduproject.film.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.lang.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
 
@@ -38,12 +36,12 @@ public class Main {
 
         Film titanic = new Film("Титаник", 1997, titanicDescription);
 
-        ArrayList<Director> titanicDirectors = new ArrayList<Director>(1);
+        List<Director> titanicDirectors = new ArrayList<Director>(1);
         titanicDirectors.add(new Director("Джеймс Кэмерон"));
 
         titanic.setDirectors(titanicDirectors);
 
-        ArrayList<ActorCharacter> titanicActors = new ArrayList<ActorCharacter>(3);
+        List<ActorCharacter> titanicActors = new ArrayList<ActorCharacter>(3);
 
         titanicActors.add(new ActorCharacter(new Actor("Леонардо ДиКаприо"), "Jack Dawson"));
         titanicActors.add(new ActorCharacter(new Actor("Кейт Уинслет"), "Rose Dewitt Bukater"));
@@ -51,7 +49,7 @@ public class Main {
 
         titanic.setActors(titanicActors);
 
-        ArrayList<Genre> titanicGenre = new ArrayList<Genre>(2);
+        List<Genre> titanicGenre = new ArrayList<Genre>(2);
         titanicGenre.add(new Genre("драма"));
         titanicGenre.add(new Genre("мелодрама"));
 

@@ -6,10 +6,12 @@ import java.util.*;
 
 public class FilmsLoader {
 
-    private ArrayList<Film> films;
-    private HashMap<Integer, String> actorsList;
-    private HashMap<Integer, String> directorsList;
-    private HashMap<Integer, String> genresList;
+    private static String basePath = "files/";
+
+    private List<Film> films;
+    private Map<Integer, String> actorsList;
+    private Map<Integer, String> directorsList;
+    private Map<Integer, String> genresList;
 
     public FilmsLoader() {
         this.films = new ArrayList<Film>();
@@ -18,11 +20,11 @@ public class FilmsLoader {
         this.genresList = new HashMap<Integer, String>();
     }
 
-    public ArrayList<Film> getFilms() {
+    public List<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(ArrayList<Film> films) {
+    public void setFilms(List<Film> films) {
         this.films = films;
     }
 
@@ -32,17 +34,17 @@ public class FilmsLoader {
             return;
         }
 
-        HashMap<Integer, String> loadedActorsList = this.getParametersList("src/files/actors.csv");
+        Map<Integer, String> loadedActorsList = this.getParametersList(FilmsLoader.basePath + "actors.csv");
         if (loadedActorsList != null) {
             this.actorsList = loadedActorsList;
         }
 
-        HashMap<Integer, String> loadedDirectorsList = this.getParametersList("src/files/directors.csv");
+        Map<Integer, String> loadedDirectorsList = this.getParametersList(FilmsLoader.basePath + "directors.csv");
         if (loadedDirectorsList != null) {
             this.directorsList = loadedDirectorsList;
         }
 
-        HashMap<Integer, String> loadedGenresList = this.getParametersList("src/files/genres.csv");
+        Map<Integer, String> loadedGenresList = this.getParametersList(FilmsLoader.basePath + "genres.csv");
         if (loadedGenresList != null) {
             this.genresList = loadedGenresList;
         }
@@ -51,7 +53,7 @@ public class FilmsLoader {
     }
 
     private void loadFilmInfo() {
-        ArrayList<String> filmsTextList = this.getContentFromFile("src/files/films.csv");
+        List<String> filmsTextList = this.getContentFromFile(FilmsLoader.basePath + "films.csv");
         if (filmsTextList == null) {
             return;
         }
@@ -70,26 +72,33 @@ public class FilmsLoader {
     }
 
     private void enrichFilmsInfo() {
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmCharactersTextList = this.getFilmParametersList("src/files/actor_characters.csv");
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmDirectorsTextList = this.getFilmParametersList("src/files/film_directors.csv");
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> filmGenresTextList = this.getFilmParametersList("src/files/film_genres.csv");
-
-
+        Map<Integer, List<Map<Integer, String>>> filmCharactersTextList = this.getFilmParametersList(FilmsLoader.basePath + "actor_characters.csv");
+        Map<Integer, List<Map<Integer, String>>> filmDirectorsTextList = this.getFilmParametersList(FilmsLoader.basePath + "film_directors.csv");
+        Map<Integer, List<Map<Integer, String>>> filmGenresTextList = this.getFilmParametersList(FilmsLoader.basePath + "film_genres.csv");
 
         for (Film film : this.films) {
+            int filmId = film.getId();
+            if (filmCharactersTextList != null && this.actorsList != null) {
+                List<Map<Integer, String>> filmCharacters = filmCharactersTextList.get(filmId);
+                if (filmCharacters != null) {
+                    
+                }
 
-            System.out.println(film.getFullInfo());
+                System.out.println(filmCharacters);
+            }
+
+            //System.out.println(film.getFullInfo());
         }
     }
 
-    private HashMap<Integer, String> getParametersList(String csvFileName) {
-        ArrayList<String> parametersTextList = this.getContentFromFile(csvFileName);
+    private Map<Integer, String> getParametersList(String csvFileName) {
+        List<String> parametersTextList = this.getContentFromFile(csvFileName);
 
         if (parametersTextList == null) {
             return null;
         }
 
-        HashMap<Integer, String> parametersList = new HashMap<Integer, String>();
+        Map<Integer, String> parametersList = new HashMap<Integer, String>();
         for (String parameterText : parametersTextList) {
             this.addParameterFromString(parameterText, parametersList);
         }
@@ -97,14 +106,14 @@ public class FilmsLoader {
         return parametersList;
     }
 
-    private HashMap<Integer, ArrayList<HashMap<Integer, String>>> getFilmParametersList(String csvFileName) {
-        ArrayList<String> parametersTextList = this.getContentFromFile(csvFileName);
+    private Map<Integer, List<Map<Integer, String>>> getFilmParametersList(String csvFileName) {
+        List<String> parametersTextList = this.getContentFromFile(csvFileName);
 
         if (parametersTextList == null) {
             return null;
         }
 
-        HashMap<Integer, ArrayList<HashMap<Integer, String>>> parametersList = new HashMap<Integer, ArrayList<HashMap<Integer, String>>>();
+        Map<Integer, List<Map<Integer, String>>> parametersList = new HashMap<Integer, List<Map<Integer, String>>>();
         for (String parameterText : parametersTextList) {
             if (parameterText == null) {
                 continue;
@@ -121,9 +130,9 @@ public class FilmsLoader {
             if (filmId != null && paramId != null) {
                 String paramText = (strArray.length == 3) ? strArray[2] : "";
 
-                ArrayList<HashMap<Integer, String>> paramsInFilm = parametersList.get(filmId);
+                List<Map<Integer, String>> paramsInFilm = parametersList.get(filmId);
                 if (paramsInFilm == null) {
-                    paramsInFilm = new ArrayList<HashMap<Integer, String>>();
+                    paramsInFilm = new ArrayList<Map<Integer, String>>();
                 }
 
                 paramsInFilm.add(new HashMap<Integer, String>() {{ put(paramId, paramText); }});
@@ -132,12 +141,10 @@ public class FilmsLoader {
             }
         }
 
-        System.out.println(parametersList);
-
         return parametersList;
     }
 
-    private void addParameterFromString(String parameterText, HashMap<Integer, String> parametersList) {
+    private void addParameterFromString(String parameterText, Map<Integer, String> parametersList) {
         String[] parameterInfo = this.getArrayFromString(parameterText, 2);
         if (parameterInfo == null) {
             return;
@@ -161,7 +168,7 @@ public class FilmsLoader {
         return (Integer) value;
     }
 
-    private ArrayList<String> getContentFromFile(String fileName) {
+    private List<String> getContentFromFile(String fileName) {
         FileWorker actorsWorker = new FileWorker(fileName);
         actorsWorker.loadContentFromFile();
         return actorsWorker.getContent();

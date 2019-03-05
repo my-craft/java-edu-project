@@ -30,22 +30,22 @@ public class Film implements Cloneable {
     /**
      * Актеры
      */
-    private ArrayList<ActorCharacter> actors;
+    private List<ActorCharacter> actors;
 
     /**
      * Режиссеры
      */
-    private ArrayList<Director> directors;
+    private List<Director> directors;
 
     /**
      * Жанры
      */
-    private ArrayList<Genre> genres;
+    private List<Genre> genres;
 
     /**
      * Оценки и отзывы критиков
      */
-    private ArrayList<CriticRate> rates;
+    private List<CriticRate> rates;
 
     public Film(String name, int year, String description) {
         this.name = name;
@@ -92,35 +92,35 @@ public class Film implements Cloneable {
         this.description = description;
     }
 
-    public ArrayList<ActorCharacter> getActors() {
+    public List<ActorCharacter> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<ActorCharacter> actors) {
+    public void setActors(List<ActorCharacter> actors) {
         this.actors = actors;
     }
 
-    public ArrayList<Director> getDirectors() {
+    public List<Director> getDirectors() {
         return directors;
     }
 
-    public void setDirectors(ArrayList<Director> directors) {
+    public void setDirectors(List<Director> directors) {
         this.directors = directors;
     }
 
-    public ArrayList<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
-    public ArrayList<CriticRate> getRates() {
+    public List<CriticRate> getRates() {
         return rates;
     }
 
-    public void setRates(ArrayList<CriticRate> rates) {
+    public void setRates(List<CriticRate> rates) {
         this.rates = rates;
     }
 
