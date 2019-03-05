@@ -69,6 +69,12 @@ public class ActorCharacter extends FilmParameter {
         return characterString;
     }
 
+    /**
+     * Добавить в фильм текущий текущий экземпляр параметра
+     * Персонаж
+     *
+     * @param film
+     */
     @Override
     public void addParameterToFilm(Film film) {
         if (film != null) {
@@ -76,6 +82,12 @@ public class ActorCharacter extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать экземпляр параметра с помощью parameterName и записать его в параметр текущего экземпляра
+     * Привязать актера к персонажу
+     *
+     * @param actorName
+     */
     @Override
     public void setParameterByName(String actorName) {
         if (actorName != null && actorName.length() > 0) {
@@ -83,6 +95,11 @@ public class ActorCharacter extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать дополнительные поля значениями из списка строк - имя персонажа
+     *
+     * @param addParameters
+     */
     @Override
     public void setAddParameter(List<String> addParameters) {
         if (addParameters != null && addParameters.size() > 0) {

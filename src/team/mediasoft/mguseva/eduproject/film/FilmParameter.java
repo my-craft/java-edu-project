@@ -60,9 +60,24 @@ public abstract class FilmParameter {
         return this.parameter.toString();
     }
 
+    /**
+     * Добавить в фильм текущий текущий экземпляр параметра
+     *
+     * @param film
+     */
     public abstract void addParameterToFilm(Film film);
 
+    /**
+     * Инициализировать экземпляр параметра с помощью parameterName и записать его в параметр текущего экземпляра
+     *
+     * @param parameterName
+     */
     public abstract void setParameterByName(String parameterName);
 
+    /**
+     * Инициализировать дополнительные поля значениями из списка строк
+     *
+     * @param addParameters
+     */
     public abstract void setAddParameter(List<String> addParameters);
 }

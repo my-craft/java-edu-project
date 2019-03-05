@@ -10,6 +10,12 @@ public class FilmDirector extends FilmParameter {
         super(director);
     }
 
+    /**
+     * Добавить в фильм текущий текущий экземпляр параметра
+     * Режиссер
+     *
+     * @param film
+     */
     @Override
     public void addParameterToFilm(Film film) {
         if (film != null) {
@@ -17,6 +23,12 @@ public class FilmDirector extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать экземпляр параметра с помощью parameterName и записать его в параметр текущего экземпляра
+     * Привязать режиссера
+     *
+     * @param directorName
+     */
     @Override
     public void setParameterByName(String directorName) {
         if (directorName != null && directorName.length() > 0) {
@@ -24,6 +36,11 @@ public class FilmDirector extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать дополнительные поля значениями из списка строк
+     *
+     * @param addParameters
+     */
     @Override
     public void setAddParameter(List<String> addParameters) {
 

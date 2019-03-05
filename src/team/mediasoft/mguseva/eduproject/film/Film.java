@@ -124,6 +124,11 @@ public class Film implements Cloneable {
         this.rates = rates;
     }
 
+    /**
+     * Добавить персонажа в список
+     *
+     * @param actorCharacter
+     */
     public void addActorCharacter(ActorCharacter actorCharacter) {
         if (this.actors == null) {
             this.actors = new ArrayList<ActorCharacter>();
@@ -134,6 +139,11 @@ public class Film implements Cloneable {
         }
     }
 
+    /**
+     * Добавить режиссера в список
+     *
+     * @param director
+     */
     public void addDirector(FilmDirector director) {
         if (this.directors == null) {
             this.directors = new ArrayList<FilmDirector>();
@@ -142,6 +152,11 @@ public class Film implements Cloneable {
         this.directors.add(director);
     }
 
+    /**
+     * Добавить жанр в список
+     *
+     * @param genre
+     */
     public void addGenre(FilmGenre genre) {
         if (this.genres == null) {
             this.genres = new ArrayList<FilmGenre>();
@@ -150,6 +165,11 @@ public class Film implements Cloneable {
         this.genres.add(genre);
     }
 
+    /**
+     * Добавить оценку критика
+     *
+     * @param rate
+     */
     public void addCriticRate(CriticRate rate) {
         if (this.rates == null) {
             this.rates = new ArrayList<CriticRate>();
@@ -160,6 +180,7 @@ public class Film implements Cloneable {
 
     /**
      * Текст с полной информацией о фильме
+     *
      * @return String
      */
     public String getFullInfo()
@@ -202,6 +223,7 @@ public class Film implements Cloneable {
 
     /**
      * Получить отзывы критиков
+     *
      * @return String
      */
     public String getCriticRates() {

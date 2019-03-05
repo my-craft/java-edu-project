@@ -48,18 +48,50 @@ public class CriticRate extends FilmParameter {
         return info;
     }
 
+    /**
+     * Добавить в фильм текущий текущий экземпляр параметра
+     * Оценка критика
+     *
+     * @param film
+     */
     @Override
     public void addParameterToFilm(Film film) {
-
+        if (film != null) {
+            film.addCriticRate(this);
+        }
     }
 
+    /**
+     * Инициализировать экземпляр параметра с помощью parameterName и записать его в параметр текущего экземпляра
+     * Привязать оценку критика
+     *
+     * @param criticName
+     */
     @Override
-    public void setParameterByName(String parameterName) {
-
+    public void setParameterByName(String criticName) {
+        if (criticName != null && criticName.length() > 0) {
+            this.setParameter(new Critic(criticName));
+        }
     }
 
+    /**
+     * Инициализировать дополнительные поля значениями из списка строк
+     * Оценка и комментарий
+     *
+     * @param addParameters
+     */
     @Override
     public void setAddParameter(List<String> addParameters) {
+        if (addParameters != null && addParameters.size() > 1) {
+            // оценка
+            String rateStr = addParameters.iterator().next();
 
+            try {
+                this.rate = (int) Integer.parseInt(rateStr);
+            } catch (Exception e) {}
+
+            // комментарий
+            this.comment = addParameters.iterator().next();
+        }
     }
 }

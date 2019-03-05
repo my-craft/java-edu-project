@@ -10,6 +10,12 @@ public class FilmGenre extends FilmParameter {
         super(genre);
     }
 
+    /**
+     * Добавить в фильм текущий текущий экземпляр параметра
+     * Жанр
+     *
+     * @param film
+     */
     @Override
     public void addParameterToFilm(Film film) {
         if (film != null) {
@@ -17,6 +23,12 @@ public class FilmGenre extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать экземпляр параметра с помощью parameterName и записать его в параметр текущего экземпляра
+     * Привязать жанр
+     *
+     * @param genreName
+     */
     @Override
     public void setParameterByName(String genreName) {
         if (genreName != null && genreName.length() > 0) {
@@ -24,6 +36,11 @@ public class FilmGenre extends FilmParameter {
         }
     }
 
+    /**
+     * Инициализировать дополнительные поля значениями из списка строк
+     *
+     * @param addParameters
+     */
     @Override
     public void setAddParameter(List<String> addParameters) {
 

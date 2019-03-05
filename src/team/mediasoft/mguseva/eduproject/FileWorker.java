@@ -35,6 +35,9 @@ public class FileWorker {
         this.content = content;
     }
 
+    /**
+     * Загрузить контент из файла в список строк
+     */
     public void loadContentFromFile() {
         BufferedReader in = null;
 
@@ -59,6 +62,9 @@ public class FileWorker {
         }
     }
 
+    /**
+     * Выгрузить список строк в файл
+     */
     public void putContentToFile() {
         BufferedWriter out = null;
 
