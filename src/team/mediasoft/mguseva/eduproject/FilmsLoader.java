@@ -1,13 +1,8 @@
 package team.mediasoft.mguseva.eduproject;
 
-import team.mediasoft.mguseva.eduproject.comments.CommentReader;
-import team.mediasoft.mguseva.eduproject.comments.FilmChooser;
-import team.mediasoft.mguseva.eduproject.comments.NameReader;
-import team.mediasoft.mguseva.eduproject.comments.RateReader;
+import team.mediasoft.mguseva.eduproject.comments.*;
 import team.mediasoft.mguseva.eduproject.film.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class FilmsLoader extends InputChecker {

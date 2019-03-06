@@ -6,9 +6,12 @@ public abstract class StringReader extends Reader {
 
     private String inputMessage;
     private String outputMessage;
+    private String errorMessage;
 
     public StringReader() {
         super();
+
+        this.errorMessage = "Вы ничего не ввели, попробуйте ещё раз";
     }
 
     protected String getInputMessage() {
@@ -25,6 +28,14 @@ public abstract class StringReader extends Reader {
 
     protected void setOutputMessage(String outputMessage) {
         this.outputMessage = outputMessage;
+    }
+
+    protected String getErrorMessage() {
+        return errorMessage;
+    }
+
+    protected void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -44,15 +55,27 @@ public abstract class StringReader extends Reader {
     @Override
     protected Object inputInfo(BufferedReader reader) throws Exception {
         try {
-            String str = reader.readLine();
-            if (str.length() > 0) {
-                System.out.println(this.outputMessage + str);
-                return str;
-            }
-        } catch (Exception e) {}
-
-        System.out.println("Вы ничего не ввели, попробуйте ещё раз");
+            return this.getValueFromBuffer(reader.readLine());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         return null;
+    }
+
+    /**
+     * Проверка введеной строки
+     *
+     * @param inputStr
+     * @return
+     * @throws Exception
+     */
+    protected Object getValueFromBuffer(String inputStr) throws Exception {
+        if (inputStr.length() > 0) {
+            System.out.println(this.outputMessage + inputStr);
+            return inputStr;
+        }
+
+        throw new Exception(this.errorMessage);
     }
 }

@@ -5,16 +5,24 @@ import team.mediasoft.mguseva.eduproject.film.Film;
 import java.io.*;
 import java.util.*;
 
-public class FilmChooser extends Reader {
+public class FilmChooser extends StringReader {
 
     private List<Film> films;
 
     public FilmChooser() {
         super();
+        this.setMessages();
     }
 
     public FilmChooser(List<Film> films) {
         this.films = films;
+        this.setMessages();
+    }
+
+    private void setMessages() {
+        this.setInputMessage("Введите номер: ");
+        this.setOutputMessage("Вы выбрали фильм ");
+        this.setErrorMessage("Вы ввели неправильный номер фильма, попробуйте ещё раз");
     }
 
     /**
@@ -31,7 +39,7 @@ public class FilmChooser extends Reader {
             System.out.println(film.getId() + " - " + film.getName());
         }
 
-        System.out.print("Введите номер: ");
+        super.outputTask();
     }
 
     /**
@@ -41,28 +49,34 @@ public class FilmChooser extends Reader {
      * @return
      */
     @Override
-    protected Film inputInfo(BufferedReader reader) throws Exception {
+    protected Object inputInfo(BufferedReader reader) throws Exception {
         if (this.films == null) {
             throw new Exception("Нет фильмов для комментирования");
         }
 
-        try {
-            String filmNumber = reader.readLine();
+        return super.inputInfo(reader);
+    }
 
-            int filmId = this.getIntegerFromString(filmNumber);
+    /**
+     * Проверка введеной строки
+     *
+     * @param inputStr
+     * @return
+     * @throws Exception
+     */
+    @Override
+    protected Object getValueFromBuffer(String inputStr) throws Exception {
+        int filmId = this.getIntegerFromString(inputStr);
 
-            if (filmId != 0) {
-                Film film = this.findFilmById(filmId);
-                if (film != null) {
-                    System.out.println("Вы выбрали фильм " + film.getName());
-                    return film;
-                }
+        if (filmId != 0) {
+            Film film = this.findFilmById(filmId);
+            if (film != null) {
+                System.out.println(this.getOutputMessage() + film.getName());
+                return film;
             }
-        } catch (Exception e) {}
+        }
 
-        System.out.println("Вы ввели неправильный номер фильма, попробуйте ещё раз");
-
-        return null;
+        throw new Exception(this.getErrorMessage());
     }
 
     /**

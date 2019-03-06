@@ -8,29 +8,25 @@ public class RateReader extends StringReader {
 
         this.setInputMessage("Введите оценку (от 1 до 5): ");
         this.setOutputMessage("Ваша оценка: ");
+        this.setErrorMessage("Вы ввели некорретную оценку, попробуйте ещё раз");
     }
 
     /**
-     * Ввод данных
+     * Проверка введеной строки
      *
-     * @param reader
+     * @param inputStr
      * @return
+     * @throws Exception
      */
     @Override
-    protected Object inputInfo(BufferedReader reader) throws Exception {
-        try {
-            String rateNumber = reader.readLine();
+    protected Object getValueFromBuffer(String inputStr) throws Exception {
+        int rate = this.getIntegerFromString(inputStr);
 
-            int rate = this.getIntegerFromString(rateNumber);
+        if (rate > 0 && rate < 6) {
+            System.out.println(this.getOutputMessage() + rate);
+            return (Integer)rate;
+        }
 
-            if (rate > 0 && rate < 6) {
-                System.out.println(this.getOutputMessage() + rate);
-                return (Integer)rate;
-            }
-        } catch (Exception e) {}
-
-        System.out.println("Вы ввели некорретную оценку, попробуйте ещё раз");
-
-        return null;
+        throw new Exception(this.getErrorMessage());
     }
 }
