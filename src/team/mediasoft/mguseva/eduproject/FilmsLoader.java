@@ -71,7 +71,7 @@ public class FilmsLoader {
             Integer id = this.getIntegerFromString(filmInfo[0]);
             Integer year = this.getIntegerFromString(filmInfo[2]);
 
-            if (id != null) {
+            if (id != 0) {
                 this.films.add(new Film((int)id, filmInfo[1], (int)year, filmInfo[3]));
             }
         }
@@ -181,7 +181,7 @@ public class FilmsLoader {
             Integer filmId = this.getIntegerFromString(strArray[0]);
             Integer paramId = this.getIntegerFromString(strArray[1]);
 
-            if (filmId != null && paramId != null) {
+            if (filmId != 0 && paramId != 0) {
                 String paramText = (strArray.length == 3) ? strArray[2] : "";
 
                 List<Map<Integer, String>> paramsInFilm = parametersList.get(filmId);
@@ -212,7 +212,7 @@ public class FilmsLoader {
 
         Integer id = this.getIntegerFromString(parameterInfo[0]);
 
-        if (id != null) {
+        if (id != 0) {
             parametersList.put(id, parameterInfo[1]);
         }
     }
@@ -227,9 +227,7 @@ public class FilmsLoader {
         int value = 0;
         try {
             value = Integer.parseInt(valueStr);
-        } catch (Exception e) {
-            return null;
-        }
+        } catch (Exception e) {}
 
         return (Integer) value;
     }
