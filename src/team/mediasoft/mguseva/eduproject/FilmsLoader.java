@@ -1,6 +1,9 @@
 package team.mediasoft.mguseva.eduproject;
 
+import team.mediasoft.mguseva.eduproject.comments.CommentReader;
 import team.mediasoft.mguseva.eduproject.comments.FilmChooser;
+import team.mediasoft.mguseva.eduproject.comments.NameReader;
+import team.mediasoft.mguseva.eduproject.comments.RateReader;
 import team.mediasoft.mguseva.eduproject.film.*;
 
 import java.io.BufferedReader;
@@ -261,6 +264,14 @@ public class FilmsLoader extends InputChecker {
             return;
         }
 
+        CriticRate rate = new CriticRate(
+                new Critic((String) (new NameReader()).getInfoFromUser()),
+                (Integer) (new RateReader()).getInfoFromUser(),
+                (String) (new CommentReader()).getInfoFromUser());
+
+        filmToComment.addCriticRate(rate);
+
+        System.out.println(filmToComment.getCriticRates());
 
     }
 }

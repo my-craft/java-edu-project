@@ -23,17 +23,11 @@ public abstract class Reader extends InputChecker {
                 Object object = this.inputInfo(reader);
 
                 if (object != null) {
-                    break;
+                    return object;
                 }
             } while (true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception e) {}
-            }
         }
 
         return null;
