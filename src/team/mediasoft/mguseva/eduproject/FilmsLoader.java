@@ -1,10 +1,13 @@
 package team.mediasoft.mguseva.eduproject;
 
+import team.mediasoft.mguseva.eduproject.comments.FilmChooser;
 import team.mediasoft.mguseva.eduproject.film.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
-public class FilmsLoader {
+public class FilmsLoader extends InputChecker {
 
     private static String basePath = "files/";
 
@@ -90,7 +93,7 @@ public class FilmsLoader {
             this.setFilmParameters(film, filmDirectorsTextList, this.directorsList, new FilmDirector());
             this.setFilmParameters(film, filmGenresTextList, this.genresList, new FilmGenre());
 
-            System.out.println(film.getFullInfo() + "\n\n\n");
+            //System.out.println(film.getFullInfo() + "\n\n\n");
         }
     }
 
@@ -218,21 +221,6 @@ public class FilmsLoader {
     }
 
     /**
-     * Получить число из строки
-     *
-     * @param valueStr
-     * @return
-     */
-    private Integer getIntegerFromString(String valueStr) {
-        int value = 0;
-        try {
-            value = Integer.parseInt(valueStr);
-        } catch (Exception e) {}
-
-        return (Integer) value;
-    }
-
-    /**
      * Получить список строк файла
      *
      * @param fileName
@@ -262,5 +250,17 @@ public class FilmsLoader {
         }
 
         return strArray;
+    }
+
+    /**
+     * Ввод комментариев к фильму
+     */
+    public void inputCommentToFilm() {
+        Film filmToComment = (Film) (new FilmChooser(this.films)).getInfoFromUser();
+        if (filmToComment == null) {
+            return;
+        }
+
+
     }
 }
