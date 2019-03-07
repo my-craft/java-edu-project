@@ -1,7 +1,5 @@
 package team.mediasoft.mguseva.eduproject.film;
 
-import java.util.List;
-
 public class FilmDirector extends FilmParameter {
 
     public FilmDirector() {}
@@ -42,7 +40,7 @@ public class FilmDirector extends FilmParameter {
      * @param addParameters
      */
     @Override
-    public void setAddParameter(List<String> addParameters) {
+    public void setAddParameter(String[] addParameters) {
 
     }
 }

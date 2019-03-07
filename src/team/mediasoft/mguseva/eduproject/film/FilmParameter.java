@@ -1,9 +1,10 @@
 package team.mediasoft.mguseva.eduproject.film;
 
-import java.util.List;
+import team.mediasoft.mguseva.eduproject.InputChecker;
+
 import java.util.Objects;
 
-public abstract class FilmParameter {
+public abstract class FilmParameter extends InputChecker {
 
     private Parameter parameter;
 
@@ -79,5 +80,5 @@ public abstract class FilmParameter {
      *
      * @param addParameters
      */
-    public abstract void setAddParameter(List<String> addParameters);
+    public abstract void setAddParameter(String[] addParameters);
 }

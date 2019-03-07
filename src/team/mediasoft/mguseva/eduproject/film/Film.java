@@ -240,7 +240,7 @@ public class Film implements Cloneable {
                 rateCount++;
             }
 
-            rates += ((float)rateSum / (float)rateCount) + "\n";
+            rates += Math.round((float)rateSum / (float)rateCount) + "\n";
         }
 
         rates += "Отзывы: \n";

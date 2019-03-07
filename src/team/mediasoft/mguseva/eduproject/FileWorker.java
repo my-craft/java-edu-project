@@ -64,18 +64,18 @@ public class FileWorker {
 
     /**
      * Выгрузить список строк в файл
+     *
+     * @param append
      */
-    public void putContentToFile() {
+    public void putContentToFile(boolean append) {
         BufferedWriter out = null;
 
         try {
-            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName), StandardCharsets.UTF_8));
-
-            String newLineChar = "";
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName, append), StandardCharsets.UTF_8));
 
             for (String tempStr : this.content) {
-                out.write(newLineChar + tempStr);
-                newLineChar = "\n";
+                out.write(tempStr);
+                out.newLine();
             }
         } catch (Exception e) {
             System.out.println("Oops!");

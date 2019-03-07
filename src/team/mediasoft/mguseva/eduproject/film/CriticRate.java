@@ -1,7 +1,5 @@
 package team.mediasoft.mguseva.eduproject.film;
 
-import java.util.List;
-
 public class CriticRate extends FilmParameter {
 
     private int rate;
@@ -49,6 +47,17 @@ public class CriticRate extends FilmParameter {
     }
 
     /**
+     * Пребразовать в строку с разделителем ;
+     *
+     * @return
+     */
+    public String toCsvString() {
+        return this.getParameter().getName() + ";" +
+                this.rate + ";" +
+                this.comment;
+    }
+
+    /**
      * Добавить в фильм текущий текущий экземпляр параметра
      * Оценка критика
      *
@@ -81,17 +90,13 @@ public class CriticRate extends FilmParameter {
      * @param addParameters
      */
     @Override
-    public void setAddParameter(List<String> addParameters) {
-        if (addParameters != null && addParameters.size() > 1) {
+    public void setAddParameter(String[] addParameters) {
+        if (addParameters != null && addParameters.length > 1) {
             // оценка
-            String rateStr = addParameters.iterator().next();
-
-            try {
-                this.rate = (int) Integer.parseInt(rateStr);
-            } catch (Exception e) {}
+            this.rate = this.getIntegerFromString(addParameters[0]);
 
             // комментарий
-            this.comment = addParameters.iterator().next();
+            this.comment = addParameters[1];
         }
     }
 }

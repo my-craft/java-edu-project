@@ -1,6 +1,5 @@
 package team.mediasoft.mguseva.eduproject.film;
 
-import java.util.List;
 import java.util.Objects;
 
 public class ActorCharacter extends FilmParameter {
@@ -101,9 +100,9 @@ public class ActorCharacter extends FilmParameter {
      * @param addParameters
      */
     @Override
-    public void setAddParameter(List<String> addParameters) {
-        if (addParameters != null && addParameters.size() > 0) {
-            this.character = addParameters.iterator().next();
+    public void setAddParameter(String[] addParameters) {
+        if (addParameters != null && addParameters.length > 0) {
+            this.character = addParameters[0];
         }
     }
 }

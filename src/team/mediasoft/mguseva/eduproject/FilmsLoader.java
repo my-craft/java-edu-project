@@ -13,12 +13,14 @@ public class FilmsLoader extends InputChecker {
     private Map<Integer, String> actorsList;
     private Map<Integer, String> directorsList;
     private Map<Integer, String> genresList;
+    private Map<Integer, String> criticsList;
 
     public FilmsLoader() {
         this.films = new ArrayList<Film>();
         this.actorsList = new HashMap<Integer, String>();
         this.directorsList = new HashMap<Integer, String>();
         this.genresList = new HashMap<Integer, String>();
+        this.criticsList = new HashMap<Integer, String>();
     }
 
     public List<Film> getFilms() {
@@ -69,11 +71,14 @@ public class FilmsLoader extends InputChecker {
         for (String filmText : filmsTextList) {
             String[] filmInfo = this.getArrayFromString(filmText, 4);
 
+            if (filmInfo == null) {
+                continue;
+            }
+
             Integer id = this.getIntegerFromString(filmInfo[0]);
-            Integer year = this.getIntegerFromString(filmInfo[2]);
 
             if (id != 0) {
-                this.films.add(new Film((int)id, filmInfo[1], (int)year, filmInfo[3]));
+                this.films.add(new Film((int)id, filmInfo[1], this.getIntegerFromString(filmInfo[2]), filmInfo[3]));
             }
         }
     }
@@ -86,12 +91,18 @@ public class FilmsLoader extends InputChecker {
         Map<Integer, List<Map<Integer, String>>> filmDirectorsTextList = this.getFilmParametersList(FilmsLoader.basePath + "film_directors.csv");
         Map<Integer, List<Map<Integer, String>>> filmGenresTextList = this.getFilmParametersList(FilmsLoader.basePath + "film_genres.csv");
 
+        Map<Integer, List<Map<Integer, String>>> filmRatesTextList = this.getRatesList(FilmsLoader.basePath + "rates.csv");
+
+        System.out.println(filmRatesTextList);
+
         for (Film film : this.films) {
             this.setFilmParameters(film, filmCharactersTextList, this.actorsList, new ActorCharacter());
             this.setFilmParameters(film, filmDirectorsTextList, this.directorsList, new FilmDirector());
             this.setFilmParameters(film, filmGenresTextList, this.genresList, new FilmGenre());
+            this.setFilmParameters(film, filmRatesTextList, this.criticsList, new CriticRate());
 
-            //System.out.println(film.getFullInfo() + "\n\n\n");
+            System.out.println(film.getFullInfo() + "\n\n\n");
+            System.out.println(film.getCriticRates() + "\n\n\n");
         }
     }
 
@@ -124,7 +135,7 @@ public class FilmsLoader extends InputChecker {
                         // установить в него значение
                         tempFilmParameter.setParameterByName(parametersNames.get(entry.getKey()));
                         // установить в него дополнительное свойство
-                        tempFilmParameter.setAddParameter(new ArrayList<String>() {{ add(entry.getValue()); }});
+                        tempFilmParameter.setAddParameter(this.getArrayFromString(entry.getValue(), 0));
 
                         // добавить его в фильм
                         tempFilmParameter.addParameterToFilm(film);
@@ -174,8 +185,8 @@ public class FilmsLoader extends InputChecker {
                 continue;
             }
 
-            String[] strArray = parameterText.split(";");
-            if (strArray.length < 2 || strArray.length > 3) {
+            String[] strArray = this.getArrayFromString(parameterText, 0);
+            if (strArray == null || strArray.length < 2 || strArray.length > 3) {
                 continue;
             }
 
@@ -185,18 +196,73 @@ public class FilmsLoader extends InputChecker {
             if (filmId != 0 && paramId != 0) {
                 String paramText = (strArray.length == 3) ? strArray[2] : "";
 
-                List<Map<Integer, String>> paramsInFilm = parametersList.get(filmId);
-                if (paramsInFilm == null) {
-                    paramsInFilm = new ArrayList<Map<Integer, String>>();
-                }
-
-                paramsInFilm.add(new HashMap<Integer, String>() {{ put(paramId, paramText); }});
-
-                parametersList.put(filmId, paramsInFilm);
+                this.addFilmParamToList(parametersList, filmId, paramId, paramText);
             }
         }
 
         return parametersList;
+    }
+
+    /**
+     * Получить список оценок критиков к фильму
+     *
+     * @param csvFileName
+     * @return
+     */
+    private Map<Integer, List<Map<Integer, String>>> getRatesList(String csvFileName) {
+        List<String> ratesTextList = this.getContentFromFile(csvFileName);
+
+        if (ratesTextList == null) {
+            return null;
+        }
+
+        Map<Integer, List<Map<Integer, String>>> ratesList = new HashMap<Integer, List<Map<Integer, String>>>();
+
+        int tempRateId = 1;
+
+        for (String rateText : ratesTextList) {
+            if (rateText == null) {
+                continue;
+            }
+
+            String[] strArray = this.getArrayFromString(rateText, 4);
+            if (strArray == null) {
+                continue;
+            }
+
+            Integer filmId = this.getIntegerFromString(strArray[0]);
+            Integer rate = this.getIntegerFromString(strArray[2]);
+
+            if (filmId != 0 && rate != 0) {
+                int newRateId = tempRateId++;
+                this.criticsList.put(newRateId, strArray[1]);
+
+                String paramText = rate + ";" + strArray[3];
+
+                this.addFilmParamToList(ratesList, filmId, newRateId, paramText);
+            }
+        }
+
+        return ratesList;
+    }
+
+    /**
+     * Добавить новый параметр в список параметров фильма
+     *
+     * @param paramsList
+     * @param filmId
+     * @param paramId
+     * @param text
+     */
+    private void addFilmParamToList(Map<Integer, List<Map<Integer, String>>> paramsList, int filmId, int paramId, String text) {
+        List<Map<Integer, String>> paramsInFilm = paramsList.get(filmId);
+        if (paramsInFilm == null) {
+            paramsInFilm = new ArrayList<Map<Integer, String>>();
+        }
+
+        paramsInFilm.add(new HashMap<Integer, String>() {{ put(paramId, text); }});
+
+        paramsList.put(filmId, paramsInFilm);
     }
 
     /**
@@ -225,9 +291,21 @@ public class FilmsLoader extends InputChecker {
      * @return
      */
     private List<String> getContentFromFile(String fileName) {
-        FileWorker actorsWorker = new FileWorker(fileName);
-        actorsWorker.loadContentFromFile();
-        return actorsWorker.getContent();
+        FileWorker readFileWorker = new FileWorker(fileName);
+        readFileWorker.loadContentFromFile();
+        return readFileWorker.getContent();
+    }
+
+    /**
+     * Записать строки в файл
+     *
+     * @param fileName
+     * @param content
+     * @param append
+     */
+    private void setContentToFile(String fileName, List<String> content, boolean append) {
+        FileWorker writeFileWorker = new FileWorker(fileName, content);
+        writeFileWorker.putContentToFile(append);
     }
 
     /**
@@ -238,12 +316,12 @@ public class FilmsLoader extends InputChecker {
      * @return
      */
     private String[] getArrayFromString(String str, int count) {
-        if (str == null) {
+        if (str == null || str.length() < 1) {
             return null;
         }
 
         String[] strArray = str.split(";");
-        if (strArray.length != count) {
+        if (count != 0 && strArray.length != count) {
             return null;
         }
 
@@ -268,5 +346,10 @@ public class FilmsLoader extends InputChecker {
 
         System.out.println(filmToComment.getCriticRates());
 
+        List<String> newRate = new ArrayList<String>() {{
+            add(filmToComment.getId() + ";" + rate.toCsvString());
+        }};
+
+        this.setContentToFile(this.basePath + "rates.csv", newRate, true);
     }
 }
