@@ -27,6 +27,8 @@ public class FilmChooser extends StringReader {
 
     /**
      * Вывод задачи на ввод
+     *
+     * @throws Exception
      */
     @Override
     protected void outputTask() throws Exception {
@@ -47,11 +49,13 @@ public class FilmChooser extends StringReader {
      *
      * @param reader
      * @return
+     * @throws IOException
+     * @throws IllegalArgumentException
      */
     @Override
-    protected Object inputInfo(BufferedReader reader) throws Exception {
+    protected Object inputInfo(BufferedReader reader) throws IOException, IllegalArgumentException {
         if (this.films == null || this.films.size() < 1) {
-            throw new Exception("Нет фильмов для комментирования");
+            throw new IllegalArgumentException("Нет фильмов для комментирования");
         }
 
         return super.inputInfo(reader);
@@ -62,10 +66,10 @@ public class FilmChooser extends StringReader {
      *
      * @param inputStr
      * @return
-     * @throws Exception
+     * @throws IllegalArgumentException
      */
     @Override
-    protected Object getValueFromBuffer(String inputStr) throws Exception {
+    protected Object getValueFromBuffer(String inputStr) throws IllegalArgumentException {
         int filmId = this.getIntegerFromString(inputStr);
 
         if (filmId != 0) {
@@ -76,7 +80,7 @@ public class FilmChooser extends StringReader {
             }
         }
 
-        throw new Exception(this.getErrorMessage());
+        throw new IllegalArgumentException(this.getErrorMessage());
     }
 
     /**

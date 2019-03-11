@@ -1,6 +1,7 @@
 package team.mediasoft.mguseva.eduproject.comments;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public abstract class StringReader extends Reader {
 
@@ -53,12 +54,12 @@ public abstract class StringReader extends Reader {
      * @return
      */
     @Override
-    protected Object inputInfo(BufferedReader reader) throws Exception {
+    protected Object inputInfo(BufferedReader reader) throws IOException, IllegalArgumentException {
         String newValue = reader.readLine();
 
         try {
             return this.getValueFromBuffer(newValue);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
@@ -72,12 +73,12 @@ public abstract class StringReader extends Reader {
      * @return
      * @throws Exception
      */
-    protected Object getValueFromBuffer(String inputStr) throws Exception {
+    protected Object getValueFromBuffer(String inputStr) throws IllegalArgumentException {
         if (inputStr.length() > 0) {
             System.out.println(this.outputMessage + inputStr);
             return inputStr;
         }
 
-        throw new Exception(this.errorMessage);
+        throw new IllegalArgumentException(this.errorMessage);
     }
 }

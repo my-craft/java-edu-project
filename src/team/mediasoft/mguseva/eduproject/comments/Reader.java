@@ -35,6 +35,8 @@ public abstract class Reader extends InputChecker {
 
     /**
      * Вывод задачи на ввод
+     *
+     * @throws Exception
      */
     protected abstract void outputTask() throws Exception;
 
@@ -43,6 +45,8 @@ public abstract class Reader extends InputChecker {
      *
      * @param reader
      * @return
+     * @throws IOException
+     * @throws IllegalArgumentException
      */
-    protected abstract Object inputInfo(BufferedReader reader) throws Exception;
+    protected abstract Object inputInfo(BufferedReader reader) throws IOException, IllegalArgumentException;
 }

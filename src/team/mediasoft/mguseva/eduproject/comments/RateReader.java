@@ -16,10 +16,10 @@ public class RateReader extends StringReader {
      *
      * @param inputStr
      * @return
-     * @throws Exception
+     * @throws IllegalArgumentException
      */
     @Override
-    protected Object getValueFromBuffer(String inputStr) throws Exception {
+    protected Object getValueFromBuffer(String inputStr) throws IllegalArgumentException {
         int rate = this.getIntegerFromString(inputStr);
 
         if (rate > 0 && rate < 6) {
@@ -27,6 +27,6 @@ public class RateReader extends StringReader {
             return (Integer)rate;
         }
 
-        throw new Exception(this.getErrorMessage());
+        throw new IllegalArgumentException(this.getErrorMessage());
     }
 }
