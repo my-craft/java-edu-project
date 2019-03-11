@@ -28,12 +28,12 @@ public class FilmChooser extends StringReader {
     /**
      * Вывод задачи на ввод
      *
-     * @throws Exception
+     * @throws IllegalArgumentException
      */
     @Override
-    protected void outputTask() throws Exception {
+    protected void outputTask() throws IllegalArgumentException {
         if (this.films == null || this.films.size() < 1) {
-            throw new Exception("Нет фильмов для комментирования");
+            throw new IllegalArgumentException("Нет фильмов для комментирования");
         }
 
         System.out.println("Какой фильм вы хотите прокомментировать?");

@@ -26,8 +26,10 @@ public abstract class Reader extends InputChecker {
                     return object;
                 }
             } while (true);
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("\nОшибка: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
 
         return null;
@@ -36,9 +38,9 @@ public abstract class Reader extends InputChecker {
     /**
      * Вывод задачи на ввод
      *
-     * @throws Exception
+     * @throws IllegalArgumentException
      */
-    protected abstract void outputTask() throws Exception;
+    protected abstract void outputTask() throws IllegalArgumentException;
 
     /**
      * Ввод данных

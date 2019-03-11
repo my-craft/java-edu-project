@@ -41,9 +41,11 @@ public abstract class StringReader extends Reader {
 
     /**
      * Вывод задачи на ввод
+     *
+     * @throws IllegalArgumentException
      */
     @Override
-    protected void outputTask() throws Exception {
+    protected void outputTask() throws IllegalArgumentException {
         System.out.print(this.inputMessage);
     }
 
