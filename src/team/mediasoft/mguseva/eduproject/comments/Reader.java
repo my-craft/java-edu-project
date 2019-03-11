@@ -27,7 +27,7 @@ public abstract class Reader extends InputChecker {
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\nОшибка: " + e.getMessage());
         }
 
         return null;

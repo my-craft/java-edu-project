@@ -30,7 +30,7 @@ public class FilmChooser extends StringReader {
      */
     @Override
     protected void outputTask() throws Exception {
-        if (this.films == null) {
+        if (this.films == null || this.films.size() < 1) {
             throw new Exception("Нет фильмов для комментирования");
         }
 
@@ -50,7 +50,7 @@ public class FilmChooser extends StringReader {
      */
     @Override
     protected Object inputInfo(BufferedReader reader) throws Exception {
-        if (this.films == null) {
+        if (this.films == null || this.films.size() < 1) {
             throw new Exception("Нет фильмов для комментирования");
         }
 

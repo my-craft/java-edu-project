@@ -54,8 +54,10 @@ public abstract class StringReader extends Reader {
      */
     @Override
     protected Object inputInfo(BufferedReader reader) throws Exception {
+        String newValue = reader.readLine();
+
         try {
-            return this.getValueFromBuffer(reader.readLine());
+            return this.getValueFromBuffer(newValue);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

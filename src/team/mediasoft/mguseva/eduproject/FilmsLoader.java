@@ -93,16 +93,14 @@ public class FilmsLoader extends InputChecker {
 
         Map<Integer, List<Map<Integer, String>>> filmRatesTextList = this.getRatesList(FilmsLoader.basePath + "rates.csv");
 
-        System.out.println(filmRatesTextList);
-
         for (Film film : this.films) {
             this.setFilmParameters(film, filmCharactersTextList, this.actorsList, new ActorCharacter());
             this.setFilmParameters(film, filmDirectorsTextList, this.directorsList, new FilmDirector());
             this.setFilmParameters(film, filmGenresTextList, this.genresList, new FilmGenre());
             this.setFilmParameters(film, filmRatesTextList, this.criticsList, new CriticRate());
 
-            System.out.println(film.getFullInfo() + "\n\n\n");
-            System.out.println(film.getCriticRates() + "\n\n\n");
+            //System.out.println(film.getFullInfo() + "\n\n\n");
+            //System.out.println(film.getCriticRates() + "\n\n\n");
         }
     }
 
@@ -337,14 +335,26 @@ public class FilmsLoader extends InputChecker {
             return;
         }
 
-        CriticRate rate = new CriticRate(
-                new Critic((String) (new NameReader()).getInfoFromUser()),
-                (Integer) (new RateReader()).getInfoFromUser(),
-                (String) (new CommentReader()).getInfoFromUser());
+        String criticName = (String) (new NameReader()).getInfoFromUser();
+
+        if (criticName == null) {
+            return;
+        }
+
+        Critic newCritic = new Critic(criticName);
+
+        Integer criticRate = (Integer) (new RateReader()).getInfoFromUser();
+        String criticComment = (String) (new CommentReader()).getInfoFromUser();
+
+        if (criticRate == null || criticComment == null) {
+            return;
+        }
+
+        CriticRate rate = new CriticRate(newCritic, criticRate, criticComment);
 
         filmToComment.addCriticRate(rate);
 
-        System.out.println(filmToComment.getCriticRates());
+        //System.out.println(filmToComment.getCriticRates());
 
         List<String> newRate = new ArrayList<String>() {{
             add(filmToComment.getId() + ";" + rate.toCsvString());
