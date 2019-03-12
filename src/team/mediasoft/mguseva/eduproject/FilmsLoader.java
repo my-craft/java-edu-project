@@ -99,7 +99,7 @@ public class FilmsLoader extends InputChecker {
             this.setFilmParameters(film, filmGenresTextList, this.genresList, new FilmGenre());
             this.setFilmParameters(film, filmRatesTextList, this.criticsList, new CriticRate());
 
-            List<ActorCharacter> filmCharacters = film.getActors();
+            /*List<ActorCharacter> filmCharacters = film.getActors();
 
             filmCharacters.sort(new CharactersSort());
             System.out.println(filmCharacters);
@@ -107,10 +107,10 @@ public class FilmsLoader extends InputChecker {
             filmCharacters.sort((ActorCharacter character1, ActorCharacter character2) -> {
                 return character1.getCharacter().compareTo(character2.getCharacter());
             });
-            System.out.println(filmCharacters);
+            System.out.println(filmCharacters);*/
 
             //System.out.println(film.getFullInfo() + "\n\n\n");
-            //System.out.println(film.getCriticRates() + "\n\n\n");
+            System.out.println(film.getCriticRates() + "\n\n\n");
         }
     }
 

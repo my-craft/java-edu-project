@@ -229,23 +229,31 @@ public class Film implements Cloneable {
     public String getCriticRates() {
         String rates = "Средняя оценка: ";
 
-        boolean hasRates = (this.rates != null && !this.rates.isEmpty());
+        Countable rateCountClass = new FilmRateCount();
+        rates += rateCountClass.count(this) + "\n";
 
-        if (hasRates) {
-            int rateSum = 0;
-            int rateCount = 0;
+        Countable<Film> rateCountLambda = (Film film) -> {
+            List<CriticRate> filmRates = film.getRates();
+            boolean hasRates = (filmRates != null && !filmRates.isEmpty());
 
-            for (CriticRate rate : this.rates) {
-                rateSum += rate.getRate();
-                rateCount++;
+            if (hasRates) {
+                float rateSum = 0;
+
+                for (CriticRate rate : filmRates) {
+                    rateSum += rate.getRate();
+                }
+
+                return rateSum;
             }
 
-            rates += Math.round((float)rateSum / (float)rateCount) + "\n";
-        }
+            return 0;
+        };
+        rates += "Суммарная оценка: ";
+        rates += rateCountLambda.count(this) + "\n";
 
         rates += "Отзывы: \n";
 
-        if (hasRates) {
+        if (this.rates != null && !this.rates.isEmpty()) {
             rates += this.rates.stream().map(Object::toString).collect(Collectors.joining("\n***\n"));
         } else {
             rates += "Никто ещё не оставил ни одного отзыва";
