@@ -94,13 +94,46 @@ public class FilmsLoader extends InputChecker {
         Map<Integer, List<Map<Integer, String>>> filmRatesTextList = this.getRatesList(FilmsLoader.basePath + "rates.csv");
 
         for (Film film : this.films) {
-            this.setFilmParameters(film, filmCharactersTextList, this.actorsList, new ActorCharacter());
-            this.setFilmParameters(film, filmDirectorsTextList, this.directorsList, new FilmDirector());
-            this.setFilmParameters(film, filmGenresTextList, this.genresList, new FilmGenre());
-            this.setFilmParameters(film, filmRatesTextList, this.criticsList, new CriticRate());
+            this.setFilmParameters(film, filmCharactersTextList, this.actorsList,
+                    (Film tempFilm, String actorName, String[] addParameters) -> {
+                        String characterName = "";
+                        if (addParameters != null && addParameters.length > 0) {
+                            characterName = addParameters[0];
+                        }
+                        tempFilm.addActorCharacter(new ActorCharacter(new Actor(actorName), characterName));
+                    }
+                );
 
-            //System.out.println(film.getFullInfo() + "\n\n\n");
-            //System.out.println(film.getCriticRates() + "\n\n\n");
+            this.setFilmParameters(film, filmDirectorsTextList, this.directorsList,
+                    (Film tempFilm, String directorName, String[] addParameters) -> {
+                        tempFilm.addDirector(new FilmDirector(new Director(directorName)));
+                    }
+                );
+
+            this.setFilmParameters(film, filmGenresTextList, this.genresList,
+                    (Film tempFilm, String genreName, String[] addParameters) -> {
+                        tempFilm.addGenre(new FilmGenre(new Genre(genreName)));
+                    }
+                );
+
+            this.setFilmParameters(film, filmRatesTextList, this.criticsList,
+                    (Film tempFilm, String criticName, String[] addParameters) -> {
+                        int rate = 0;
+                        String comment = "";
+                        if (addParameters != null && addParameters.length > 1) {
+                            // оценка
+                            rate = this.getIntegerFromString(addParameters[0]);
+
+                            // комментарий
+                            comment = addParameters[1];
+                        }
+
+                        tempFilm.addCriticRate(new CriticRate(new Critic(criticName), rate, comment));
+                    }
+                );
+
+            System.out.println(film.getFullInfo() + "\n\n\n");
+            System.out.println(film.getCriticRates() + "\n\n\n");
         }
     }
 
@@ -110,9 +143,9 @@ public class FilmsLoader extends InputChecker {
      * @param film фильм
      * @param parametersInFilms таблица соответствий фильмов и параметров
      * @param parametersNames значения параметров
-     * @param filmParameter экземпляр класса параметра для вызова привязки к фильму
+     * @param filmParameterAdder интерфейс добавления параметров в фильм
      */
-    private void setFilmParameters(Film film, Map<Integer, List<Map<Integer, String>>> parametersInFilms, Map<Integer, String> parametersNames, FilmParameter filmParameter) {
+    private void setFilmParameters(Film film, Map<Integer, List<Map<Integer, String>>> parametersInFilms, Map<Integer, String> parametersNames, FilmParameterAdder filmParameterAdder) {
         if (film == null || parametersInFilms == null || parametersNames == null) {
             return;
         }
@@ -126,18 +159,7 @@ public class FilmsLoader extends InputChecker {
                 // получить id параметра и дополнительное поле, если нужно
                 Map.Entry<Integer,String> entry = currentFilmParam.entrySet().iterator().next();
                 if (entry != null) {
-                    try {
-                        // получить новый экземпляр класса параметра
-                        FilmParameter tempFilmParameter = filmParameter.getClass().newInstance();
-
-                        // установить в него значение
-                        tempFilmParameter.setParameterByName(parametersNames.get(entry.getKey()));
-                        // установить в него дополнительное свойство
-                        tempFilmParameter.setAddParameter(this.getArrayFromString(entry.getValue(), 0));
-
-                        // добавить его в фильм
-                        tempFilmParameter.addParameterToFilm(film);
-                    } catch (Exception e) {}
+                    filmParameterAdder.add(film, parametersNames.get(entry.getKey()), this.getArrayFromString(entry.getValue(), 0));
                 }
             }
         }
