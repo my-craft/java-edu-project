@@ -13,9 +13,12 @@ public class Main {
         /*String res = FileWorker.getStringFromFile("src/files/test.txt");
         FileWorker.setStringToFile("src/files/test_out.txt", res);*/
 
-        FilmsLoader loader = new FilmsLoader();
+        /*FilmsLoader loader = new FilmsLoader();
         loader.loadFilms();
-        loader.inputCommentToFilm();
+        loader.inputCommentToFilm();*/
+
+        FilmsDBLoader loader = new FilmsDBLoader();
+        loader.loadFilms();
     }
 
     public static void printTestFilm() {
