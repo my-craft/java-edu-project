@@ -4,6 +4,15 @@ import java.util.Objects;
 
 public class ActorCharacter extends FilmParameter {
 
+    /**
+     * Названия для запросов в БД
+     */
+    public static final String tableName = "film.film_characters";
+    public static final String idColumn = "film_character_id";
+    public static final String filmIdColumn = "film_id";
+    public static final String actorIdColumn = "actor_id";
+    public static final String characterColumn = "character";
+
     private String character;
 
     public ActorCharacter() {}

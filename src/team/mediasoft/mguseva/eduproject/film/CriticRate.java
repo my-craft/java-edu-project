@@ -5,6 +5,16 @@ public class CriticRate extends FilmParameter {
     private int rate;
     private String comment;
 
+    /**
+     * Названия для запросов в БД
+     */
+    public static final String tableName = "film.film_critic_rates";
+    public static final String idColumn = "film_critic_rate_id";
+    public static final String filmIdColumn = "film_id";
+    public static final String criticIdColumn = "critic_id";
+    public static final String rateColumn = "rate";
+    public static final String commentColumn = "comment";
+
     public CriticRate() {}
 
     public CriticRate(Critic critic) {

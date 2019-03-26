@@ -2,6 +2,14 @@ package team.mediasoft.mguseva.eduproject.film;
 
 public class FilmDirector extends FilmParameter {
 
+    /**
+     * Названия для запросов в БД
+     */
+    public static final String tableName = "film.film_directors";
+    public static final String idColumn = "film_director_id";
+    public static final String filmIdColumn = "film_id";
+    public static final String directorIdColumn = "director_id";
+
     public FilmDirector() {}
 
     public FilmDirector(Director director) {

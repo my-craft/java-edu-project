@@ -2,6 +2,14 @@ package team.mediasoft.mguseva.eduproject.film;
 
 public class FilmGenre extends FilmParameter {
 
+    /**
+     * Названия для запросов в БД
+     */
+    public static final String tableName = "film.film_genres";
+    public static final String idColumn = "film_genre_id";
+    public static final String filmIdColumn = "film_id";
+    public static final String genreIdColumn = "genre_id";
+
     public FilmGenre() {}
 
     public FilmGenre(Genre genre) {

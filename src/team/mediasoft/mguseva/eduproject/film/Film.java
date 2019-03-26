@@ -47,6 +47,15 @@ public class Film implements Cloneable {
      */
     private List<CriticRate> rates;
 
+    /**
+     * Названия для запросов в БД
+     */
+    public static final String tableName = "film.films";
+    public static final String idColumn = "film_id";
+    public static final String nameColumn = "name";
+    public static final String yearColumn = "year";
+    public static final String descriptionColumn = "description";
+
     public Film(String name, int year, String description) {
         this.name = name;
         this.year = year;
@@ -227,11 +236,13 @@ public class Film implements Cloneable {
      * @return String
      */
     public String getCriticRates() {
-        String rates = "Средняя оценка: ";
+        String rates = "";
 
         boolean hasRates = (this.rates != null && !this.rates.isEmpty());
 
         if (hasRates) {
+            rates += "Средняя оценка: ";
+
             int rateSum = 0;
             int rateCount = 0;
 
