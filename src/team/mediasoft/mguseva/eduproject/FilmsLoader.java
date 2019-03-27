@@ -330,7 +330,7 @@ public class FilmsLoader extends InputChecker {
      * Ввод комментариев к фильму
      */
     public void inputCommentToFilm() {
-        Film filmToComment = (Film) (new FilmChooser(this.films)).getInfoFromUser();
+        /*Film filmToComment = (Film) (new FilmChooser(this.films)).getInfoFromUser();
         if (filmToComment == null) {
             return;
         }
@@ -360,6 +360,6 @@ public class FilmsLoader extends InputChecker {
             add(filmToComment.getId() + ";" + rate.toCsvString());
         }};
 
-        this.setContentToFile(this.basePath + "rates.csv", newRate, true);
+        this.setContentToFile(this.basePath + "rates.csv", newRate, true);*/
     }
 }

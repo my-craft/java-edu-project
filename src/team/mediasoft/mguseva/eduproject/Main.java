@@ -19,6 +19,7 @@ public class Main {
 
         FilmsDBLoader loader = new FilmsDBLoader();
         loader.loadFilms();
+        loader.inputCommentToFilm();
     }
 
     public static void printTestFilm() {

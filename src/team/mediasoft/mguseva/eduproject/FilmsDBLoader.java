@@ -1,5 +1,6 @@
 package team.mediasoft.mguseva.eduproject;
 
+import team.mediasoft.mguseva.eduproject.comments.*;
 import team.mediasoft.mguseva.eduproject.film.*;
 
 import java.sql.*;
@@ -172,6 +173,74 @@ public class FilmsDBLoader {
             }
         } catch (Exception e) {
 
+        }
+    }
+
+    /**
+     * Ввод комментариев к фильму
+     */
+    public void inputCommentToFilm() {
+        Film filmToComment = (Film) (new FilmChooser(this.films)).getInfoFromUser();
+        if (filmToComment == null) {
+            return;
+        }
+
+        String criticName = (String) (new NameReader()).getInfoFromUser();
+
+        if (criticName == null) {
+            return;
+        }
+
+        Critic newCritic = new Critic(criticName);
+
+        Integer criticRate = (Integer) (new RateReader()).getInfoFromUser();
+        String criticComment = (String) (new CommentReader()).getInfoFromUser();
+
+        if (criticRate == null || criticComment == null) {
+            return;
+        }
+
+        CriticRate rate = new CriticRate(newCritic, criticRate, criticComment);
+
+        filmToComment.addCriticRate(rate);
+
+        this.saveRate(filmToComment, rate);
+    }
+
+    private void saveRate(Film film, CriticRate rate) {
+        try {
+            this.dbConnector.connect();
+            Connection connection = this.dbConnector.getConnection();
+            if(connection != null) {
+                String sql = "insert into " + Critic.tableName +
+                                " (" + Critic.nameColumn + ")" +
+                                " values (?)";
+
+                PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, rate.getParameter().getName());
+
+                if (preparedStatement.executeUpdate() > 0) {
+                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        String rateSql = "insert into " + CriticRate.tableName +
+                                " (" + CriticRate.filmIdColumn + ", " + CriticRate.criticIdColumn + ", " + CriticRate.rateColumn + ", " + CriticRate.commentColumn + ")" +
+                                " values (?, ?, ?, ?)";
+                        PreparedStatement ratePreparedStatement = connection.prepareStatement(rateSql);
+                        ratePreparedStatement.setInt(1, film.getId());
+                        ratePreparedStatement.setInt(2, generatedKeys.getInt(1));
+                        ratePreparedStatement.setInt(3, rate.getRate());
+                        ratePreparedStatement.setString(4, rate.getComment());
+
+                        ratePreparedStatement.executeUpdate();
+                    }
+
+                }
+
+            }
+        } catch (Exception e) {
+
+        } finally {
+            dbConnector.disconnect();
         }
     }
 }
